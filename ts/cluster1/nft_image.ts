@@ -11,11 +11,11 @@ import { readFile } from "fs/promises";
 
 // Create a devnet connection
 const umi = createUmi("https://api.devnet.solana.com");
-const bundlrUploader = createBundlrUploader(umi);
 
 let keypair = umi.eddsa.createKeypairFromSecretKey(new Uint8Array(wallet));
 const signer = createSignerFromKeypair(umi, keypair);
 
+umi.use(irysUploader());
 umi.use(signerIdentity(signer));
 umi.use(irysUploader());
 (async () => {
